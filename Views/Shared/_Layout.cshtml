@@ -1,0 +1,246 @@
+﻿@using Microsoft.AspNetCore.Http
+@using AmazonCloneMVC.Models
+
+@inject IHttpContextAccessor Accessor
+@{
+    var val = 0;
+    if (@Accessor.HttpContext.Session.GetCartService() != null)
+    {
+        val = @Accessor.HttpContext.Session.GetCartService()._cartItems.Count();
+
+    }
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MonCatalogueProduit</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MonCatalogueProduit.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <style>
+        .login-card {
+            max-width: 300px;
+            position: fixed;
+            top: 80px; /* Adjust the top position as needed */
+            right: 20px;
+            background-color: #fff;
+            border: 1px solid #e65e22;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000; /* Ensure it's above other elements */
+        }
+
+        .login-card:hover{
+                border: 4px solid #e65e22;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+            a:hover {
+                color: #ddd;
+            }
+
+        /* Header or Navbar */
+        header {
+            width: 100%;
+            background-color: #0f1111;
+        }
+
+        .navbar {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            color: #fff;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .nav-logo img {
+            margin-top: 10px;
+            width: 128px;
+        }
+
+
+        /* Footer */
+        .footer-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #37475a;
+            color: #fff;
+            font-size: 0.875rem;
+            font-weight: 600;
+            height: 60px;
+        }
+
+        .footer-items {
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+            margin: 0 auto;
+            background: #232f3e;
+        }
+
+            .footer-items h3 {
+                font-size: 1rem;
+                font-weight: 500;
+                color: #fff;
+                margin: 20px 0 10px 0;
+            }
+
+            .footer-items ul {
+                list-style: none;
+                margin-bottom: 20px;
+            }
+
+            .footer-items li a {
+                color: #ddd;
+                font-size: 0.875rem;
+            }
+
+                .footer-items li a:hover {
+                    text-decoration: underline;
+                }
+
+    </style>
+
+
+    <header>
+        <nav class="navbar">
+            <div class="nav-logo row py-2">
+                <a href="/" class="col px-5"><img src="/images/amazonLogo.png" alt="logo"></a>
+                <a href="/Produits" class="nav-link col text-white"  >Products</a>
+                <a href="/Categories" class="nav-link col text-white"  >Categories</a>
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item px-5">
+                    <!-- Create a column for the right-aligned content -->
+                    <a class="nav-link text-white text-center" href="Home/Cart">
+                        @val <img src="/images/shopping_cart.svg" width="24">
+
+                    </a>
+                
+                   
+                
+                </li>
+                
+
+            </ul>
+        </nav>
+        <!-- Add the login card with the partial view -->
+        <div class="login-card">
+            <partial name="_LoginPartial" />
+        </div>
+    </header>
+
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer>
+        <a href="#" class="footer-title">
+            Back to top
+        </a>
+        <div class="footer-items">
+            <ul>
+                <h3>Get to Know Us</h3>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Press Release</a></li>
+                <li><a href="#">Amazon Science</a></li>
+            </ul>
+            <ul>
+                <h3>Connect with Us</h3>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+            <ul>
+                <h3>Make Money with Us</h3>
+                <li><a href="#">Sell on Amazon</a></li>
+                <li><a href="#">Sell under Amazon Accelerator</a></li>
+                <li><a href="#">Protect and Build Your Brand</a></li>
+                <li><a href="#">Amazon Global Selling</a></li>
+                <li><a href="#">Become an Affiliate</a></li>
+                <li><a href="#">Fulfillment by Amazon</a></li>
+                <li><a href="#">Advertise Your Products</a></li>
+                <li><a href="#">Amazon Pay on Merchants</a></li>
+            </ul>
+            <ul>
+                <h3>Let Us Help You</h3>
+                <li><a href="#">COVID-19 and Amazon</a></li>
+                <li><a href="#">Your Account</a></li>
+                <li><a href="#">Return Centre</a></li>
+                <li><a href="#">100% Purchase Protection</a></li>
+                <li><a href="#">Amazon App Download</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+        </div>
+    </footer>
+    <!--
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-page="/Index">Buy-Now</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Produits/Index">Produits</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Categories/Index">Categories</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <main role="main" class="pb-3">
+    @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2023 - MonCatalogueProduit
+            </div>
+        </footer>
+        -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

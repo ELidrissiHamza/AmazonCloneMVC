@@ -1,0 +1,28 @@
+﻿@model IEnumerable<AmazonCloneMVC.Models.Produit>
+@{
+    ViewData["Title"] = "Cart";
+}
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="../@item.ImagePath" style="width:350px;height:236px" class="card-img-top" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Description)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Prix) MAD</p>
+                    <form asp-action="RemoveProd" class="row">
+                        <input name="prodId" type="hidden" value="@item.ProduitID" class="form-control" />
+
+                        <button class="col btn btn-danger ml-2" type="submit">Remove</button>
+                        <a class="col btn btn-outline-info mr-2" href="../Produits/Details/@item.ProduitID">Details</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row mt-5"></div>
+
+</div>

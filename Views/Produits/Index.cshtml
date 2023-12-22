@@ -1,0 +1,45 @@
+﻿@model IEnumerable<AmazonCloneMVC.Models.Produit>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h1>Listes Des Produits</h1>
+
+
+<a class="btn btn-primary" asp-action="Create">Create New</a>
+
+
+<div class="row">
+    <h2>Produits</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.ProduitName)</th>
+                <th>@Html.DisplayNameFor(model => model.Description)</th>
+                <th>@Html.DisplayNameFor(model => model.Prix)</th>
+                <th>@Html.DisplayNameFor(model => model.Quantite)</th>
+                <th>@Html.DisplayNameFor(model => model.Categorie)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.ProduitName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Prix)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Quantite)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Categorie.NomCategorie)</td>
+                    <td>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.ProduitID">Edit</a>
+                    <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.ProduitID">Details</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ProduitID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

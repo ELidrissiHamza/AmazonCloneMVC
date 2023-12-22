@@ -1,0 +1,99 @@
+﻿@model IEnumerable<AmazonCloneMVC.Models.Produit>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    /* Container for the search bar */
+    .search-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px;
+    }
+
+    /* Input field styling */
+    .search-input {
+        padding: 10px;
+        width: 300px;
+        border: 1px solid #3498db; /* Utiliser une couleur bleue */
+        border-radius: 5px 0 0 5px;
+        outline: none;
+        font-family: 'Arial', sans-serif; /* Utiliser une police sans-serif */
+        color: #333; /* Couleur du texte */
+    }
+
+    /* Search button styling */
+    .search-button {
+        padding: 10px 20px;
+        background-color: #fff; /* Utiliser une couleur orange */
+        color: #e67e22;
+        border: 1px solid #e67e22;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        font-family: 'Arial', sans-serif; /* Utiliser une police sans-serif */
+        
+    }
+
+        /* Search button hover effect */
+        .search-button:hover {
+            background-color: #e67e22; /* Changement de couleur au survol */
+            color : #fff;
+
+        }
+
+    /* Card styling */
+    .card {
+        margin-bottom: 20px;
+        border: 1px solid #e67e22; /* Bordure autour de la carte */
+        border-radius: 8px; /* Coins arrondis */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    }
+    
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée au survol */
+            border: 3px solid #e67e22;
+    }
+
+    /* Card title styling */
+    .card-title {
+        color: #2c3e50; /* Couleur du titre */
+    }
+
+    /* Card text styling */
+    .card-text {
+        color: #7f8c8d; /* Couleur du texte de la carte */
+    }
+</style>
+
+<h1 class="mt-5 text-center" style="color:#e67e22">Bienvenue !</h1>
+
+<form asp-action="Index">
+    <div class="search-container">
+        <input type="text" name="searchString" class="search-input" placeholder="Search...">
+        <button type="submit" class="search-button">Search</button>
+    </div>
+</form>
+
+<div class="container">
+    <div class="row mt-5">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card p-3">
+                    <img src="@item.ImagePath" style="width:350px;height:236px" class="card-img-top" alt="Product Image">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Description)</h5>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Prix) MAD</p>
+                        <form asp-action="AddToCard" class="row">
+                            <input name="ProduitId" type="hidden" value="@item.ProduitID" class="form-control" />
+                            <button class="col btn btn-outline-warning ml-4" type="submit">Add to Cart</button>
+                            <a href="Produits/Details/@item.ProduitID" class="col btn btn-outline-info mr-2">Details</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
